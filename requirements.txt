@@ -1,0 +1,9 @@
+streamlit
+pdf2image
+paddleocr
+opencv-python
+numpy
+langchain
+sentence-transformers
+faiss-cpu
+openai
