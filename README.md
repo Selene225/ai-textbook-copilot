@@ -1,123 +1,115 @@
-AI 教材学习助手（AI Textbook Copilot）
+# AI Textbook Copilot (RAG)
 
-一个基于 OCR + 向量检索 + 大模型（RAG）的智能学习工具，支持上传教材 PDF，实现自动解析与问答。
+一个基于 RAG（Retrieval-Augmented Generation）的 AI 教材问答系统
+支持 PDF 教材解析、OCR 识别、语义检索，并结合大模型生成高质量答案
 
-项目简介
+---
 
-本项目旨在解决教材学习中的信息获取效率问题。传统教材内容检索依赖人工查找，效率较低。本项目通过构建一个基于检索增强生成（RAG）的系统，使教材内容可以被语义理解和调用，实现“可对话教材”。
+## 项目功能
 
-主要能力包括：
+* 上传 PDF 教材
+* 自动 OCR 识别（PaddleOCR）
+* 文本切分与向量化
+* 构建向量数据库（FAISS）
+* 基于语义检索的智能问答（RAG）
+* 使用大模型生成上下文相关回答（DeepSeek）
 
-PDF 教材自动解析（支持扫描版）
+---
 
-文本语义向量化存储
+## 技术架构
 
-基于语义的相关内容检索
-
-结合上下文的大模型问答
-
-Demo 展示
-
-核心功能
-教材解析（OCR）
-
-使用 PaddleOCR 对 PDF 进行逐页解析，支持扫描版教材内容提取，并进行基础图像预处理以提高识别准确率。
-
-知识库构建
-
-使用 LangChain 进行文本切分
-
-使用 text2vec-base-chinese 生成文本向量
-
-使用 FAISS 构建本地向量索引库
-
-智能问答（RAG）
-
-用户输入问题后，系统流程如下：
-
-将问题向量化
-
-在向量数据库中检索 Top-K 相关文本
-
-将检索结果作为上下文输入大模型
-
-生成基于教材内容的回答
-
-技术架构
 PDF教材
-   ↓
-OCR识别（PaddleOCR）
-   ↓
-文本切分（LangChain）
-   ↓
-向量化（text2vec）
-   ↓
-向量数据库（FAISS）
-   ↓
-语义检索（Top-K）
-   ↓
-LLM生成回答（DeepSeek）
-技术栈
-模块	技术
-前端	Streamlit
-OCR	PaddleOCR
-向量模型	text2vec-base-chinese
-向量数据库	FAISS
-大模型	DeepSeek API
-文本处理	LangChain
-安装与运行
-克隆项目
-git clone https://github.com/yourname/ai-textbook-copilot.git
+→ OCR识别（PaddleOCR）
+→ 文本切分（LangChain）
+→ 向量化（text2vec）
+→ 向量数据库（FAISS）
+→ 语义检索（Top-K）
+→ LLM生成回答（DeepSeek）
+
+---
+
+## 技术栈
+
+* Python
+* Streamlit
+* LangChain
+* PaddleOCR
+* FAISS
+* text2vec
+* DeepSeek API
+
+---
+
+## 项目演示
+
+![demo](ai_demo_pro.png)
+
+---
+
+## 快速开始
+
+### 1. 克隆项目
+
+```bash
+git clone https://github.com/Selene225/ai-textbook-copilot.git
 cd ai-textbook-copilot
-安装依赖
+```
+
+### 2. 安装依赖
+
+```bash
 pip install -r requirements.txt
-配置 API Key
+```
 
-Linux / Mac：
+### 3. 配置 API Key
 
+#### Linux / Mac
+
+```bash
 export DEEPSEEK_API_KEY=your_api_key
+```
 
-Windows：
+#### Windows
 
+```bash
 set DEEPSEEK_API_KEY=your_api_key
-运行项目
+```
+
+### 4. 运行项目
+
+```bash
 streamlit run app.py
-使用说明
+```
 
-上传 PDF 教材
+---
 
-系统自动进行 OCR 解析并构建知识库
+## 使用流程
 
-输入问题
+1. 上传 PDF 教材
+2. 系统自动进行 OCR 解析并构建知识库
+3. 输入问题
+4. 获取基于教材内容的回答
 
-获取基于教材内容的回答
+---
 
-项目亮点
+## 项目亮点
 
-支持扫描版教材（OCR）
+* 实现完整 RAG 流程（从数据 → 检索 → 生成）
+* 支持 OCR 处理非结构化教材
+* 结合向量数据库实现高效语义搜索
+* 具备实际应用场景（学习辅助 / 知识问答）
 
-本地向量数据库（FAISS）
+---
 
-基于 RAG 架构降低模型幻觉
+## 后续优化方向
 
-针对中文优化的向量模型
+* 引入 Rerank 模型提升检索精度
+* 增加答案来源定位（引用原文）
+* UI 产品化优化
+* 支持自动摘要与知识点整理
 
-后续优化方向
+---
 
-支持多教材联合检索
-
-引入重排序模型（Rerank）提升检索精度
-
-增加答案来源定位（引用原文）
-
-UI 进一步产品化优化
-
-增加自动摘要与知识点整理功能
-
-项目说明
-
-本项目用于探索大模型在学习场景中的应用，重点在于 RAG（Retrieval-Augmented Generation）技术的实现路径与效果。
-
-License
+## License
 
 MIT License
